@@ -2,3 +2,4 @@ venv
 umap_learn.egg-info/
 __pycache__
 ci_scripts
+notebooks
