@@ -1,0 +1,412 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Comparison of Dimension Reduction Techniques &mdash; umap 0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Frequently Asked Questions" href="../faq.html" />
+    <link rel="prev" title="UMAP on the Fashion MNIST Digits dataset using Datashader" href="plot_fashion-mnist_example.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> umap
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide / Tutorial:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../basic_usage.html">How to Use UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../parameters.html">Basic UMAP Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../transform.html">Transforming New Data with UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../supervised.html">UMAP for Supervised Dimension Reduction and Metric Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clustering.html">Using UMAP for Clustering</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Gallery of Examples of UMAP usage</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="plot_mnist_example.html">UMAP on the MNIST Digits dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plot_fashion-mnist_example.html">UMAP on the Fashion MNIST Digits dataset using Datashader</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Comparison of Dimension Reduction Techniques</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background on UMAP:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../how_umap_works.html">How UMAP Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../benchmarking.html">Performance Comparison of Dimension Reduction Implementations</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">UMAP API Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">umap</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Gallery of Examples of UMAP usage</a> &raquo;</li>
+        
+      <li>Comparison of Dimension Reduction Techniques</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/auto_examples/plot_algorithm_comparison.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Click <a class="reference internal" href="#sphx-glr-download-auto-examples-plot-algorithm-comparison-py"><span class="std std-ref">here</span></a> to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="comparison-of-dimension-reduction-techniques">
+<span id="sphx-glr-auto-examples-plot-algorithm-comparison-py"></span><h1>Comparison of Dimension Reduction Techniques<a class="headerlink" href="#comparison-of-dimension-reduction-techniques" title="Permalink to this headline">¶</a></h1>
+<p>A comparison of several different dimension reduction
+techniques on a variety of toy datasets. The datasets
+are all toy datasets, but should provide a representative
+range of the strengths and weaknesses of the different
+algorithms.</p>
+<p>The time to perform the dimension reduction with each
+algorithm and each dataset is recorded in the lower
+right of each plot.</p>
+<p>Things to note about the datasets:</p>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Blobs: A set of five gaussian blobs in 10 dimensional</dt>
+<dd>space. This should be a prototypical example
+of something that should clearly separate
+even in a reduced dimension space.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Iris: a classic small dataset with one distinct class</dt>
+<dd>and two classes that are not clearly separated.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Digits: handwritten digits – ideally different digit</dt>
+<dd>classes should form distinct groups. Due to
+the nature of handwriting digits may have several
+forms (crossed or uncrossed sevens, capped or
+straight line oes, etc.)</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Wine: wine characteristics ideally used for a toy</dt>
+<dd>regression. Ultimately the data is essentially
+one dimensional in nature.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Swiss Roll: data is essentially a rectangle, but</dt>
+<dd>has been “rolled up” like a swiss roll
+in three dimensional space. Ideally a
+dimension reduction technique should
+be able to “unroll” it. The data
+has been coloured according to one dimension
+of the rectangle, so should form
+a rectangle of smooth color variation.</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Sphere: the two dimensional surface of a three</dt>
+<dd>dimensional sphere. This cannot be represented
+accurately in two dimensions without tearing.
+The sphere has been coloured with hue around
+the equator and black to white from the south
+to north pole.</dd>
+</dl>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">decomposition</span><span class="p">,</span> <span class="n">manifold</span><span class="p">,</span> <span class="n">preprocessing</span>
+<span class="kn">from</span> <span class="nn">colorsys</span> <span class="kn">import</span> <span class="n">hsv_to_rgb</span>
+
+<span class="kn">import</span> <span class="nn">umap</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">context</span><span class="o">=</span><span class="s2">&quot;paper&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="n">blobs</span><span class="p">,</span> <span class="n">blob_labels</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">make_blobs</span><span class="p">(</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">digits</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_digits</span><span class="p">(</span><span class="n">n_class</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">wine</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_wine</span><span class="p">()</span>
+<span class="n">swissroll</span><span class="p">,</span> <span class="n">swissroll_labels</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">make_swiss_roll</span><span class="p">(</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+<span class="n">sphere</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">600</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">sphere</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">sphere</span><span class="p">)</span>
+<span class="n">sphere_hsv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="p">(</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+            <span class="nb">min</span><span class="p">((</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.1</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">sphere</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">sphere_colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">hsv_to_rgb</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">sphere_hsv</span><span class="p">])</span>
+
+<span class="n">reducers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">manifold</span><span class="o">.</span><span class="n">TSNE</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;perplexity&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">}),</span>
+    <span class="c1"># (manifold.LocallyLinearEmbedding, {&#39;n_neighbors&#39;:10, &#39;method&#39;:&#39;hessian&#39;}),</span>
+    <span class="p">(</span><span class="n">manifold</span><span class="o">.</span><span class="n">Isomap</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;n_neighbors&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}),</span>
+    <span class="p">(</span><span class="n">manifold</span><span class="o">.</span><span class="n">MDS</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">(</span><span class="n">decomposition</span><span class="o">.</span><span class="n">PCA</span><span class="p">,</span> <span class="p">{}),</span>
+    <span class="p">(</span><span class="n">umap</span><span class="o">.</span><span class="n">UMAP</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;n_neighbors&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s2">&quot;min_dist&quot;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">}),</span>
+<span class="p">]</span>
+
+<span class="n">test_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">blobs</span><span class="p">,</span> <span class="n">blob_labels</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">wine</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">wine</span><span class="o">.</span><span class="n">target</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">swissroll</span><span class="p">,</span> <span class="n">swissroll_labels</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">sphere</span><span class="p">,</span> <span class="n">sphere_colors</span><span class="p">),</span>
+<span class="p">]</span>
+<span class="n">dataset_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Blobs&quot;</span><span class="p">,</span> <span class="s2">&quot;Iris&quot;</span><span class="p">,</span> <span class="s2">&quot;Digits&quot;</span><span class="p">,</span> <span class="s2">&quot;Wine&quot;</span><span class="p">,</span> <span class="s2">&quot;Swiss Roll&quot;</span><span class="p">,</span> <span class="s2">&quot;Sphere&quot;</span><span class="p">]</span>
+
+<span class="n">n_rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span>
+<span class="n">n_cols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">reducers</span><span class="p">)</span>
+<span class="n">ax_index</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ax_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># plt.figure(figsize=(9 * 2 + 3, 12.5))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span>
+    <span class="n">left</span><span class="o">=.</span><span class="mo">02</span><span class="p">,</span> <span class="n">right</span><span class="o">=.</span><span class="mi">98</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=.</span><span class="mo">001</span><span class="p">,</span> <span class="n">top</span><span class="o">=.</span><span class="mi">96</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=.</span><span class="mo">05</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=.</span><span class="mo">01</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">data</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">test_data</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">reducer</span><span class="p">,</span> <span class="n">args</span> <span class="ow">in</span> <span class="n">reducers</span><span class="p">:</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">embedding</span> <span class="o">=</span> <span class="n">reducer</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">,</span> <span class="n">ax_index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">embedding</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+                <span class="o">*</span><span class="n">embedding</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Spectral&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span>
+            <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+            <span class="mf">0.99</span><span class="p">,</span>
+            <span class="mf">0.01</span><span class="p">,</span>
+            <span class="s2">&quot;{:.2f} s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">elapsed_time</span><span class="p">),</span>
+            <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
+            <span class="n">horizontalalignment</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+        <span class="n">ax_index</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax_list</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_rows</span><span class="p">)</span> <span class="o">*</span> <span class="n">n_cols</span><span class="p">:</span>
+    <span class="n">ax_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">dataset_names</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="n">n_cols</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_cols</span><span class="p">):</span>
+    <span class="n">ax_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">reducers</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]())</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;(&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">ax_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_label_position</span><span class="p">(</span><span class="s2">&quot;top&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-algorithm-comparison-py">
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/plot_algorithm_comparison.py" download=""><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_algorithm_comparison.py</span></code></a></div>
+<div class="sphx-glr-download docutils container">
+<a class="reference download internal" href="../_downloads/plot_algorithm_comparison.ipynb" download=""><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_algorithm_comparison.ipynb</span></code></a></div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../faq.html" class="btn btn-neutral float-right" title="Frequently Asked Questions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="plot_fashion-mnist_example.html" class="btn btn-neutral" title="UMAP on the Fashion MNIST Digits dataset using Datashader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Leland McInnes.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.3',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

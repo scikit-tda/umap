@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Frequently Asked Questions &mdash; umap 0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How UMAP Works" href="how_umap_works.html" />
+    <link rel="prev" title="Comparison of Dimension Reduction Techniques" href="auto_examples/plot_algorithm_comparison.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> umap
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide / Tutorial:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">How to Use UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameters.html">Basic UMAP Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transform.html">Transforming New Data with UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervised.html">UMAP for Supervised Dimension Reduction and Metric Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Using UMAP for Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples of UMAP usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#should-i-normalise-my-features">Should I normalise my features?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#can-i-cluster-the-results-of-umap">Can I cluster the results of UMAP?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-clusters-are-all-squashed-together-and-i-can-t-see-internal-structure">The clusters are all squashed together and I can’t see internal structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#is-there-gpu-or-multicore-cpu-support">Is there GPU or multicore-CPU support?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#can-i-add-a-custom-loss-function">Can I add a custom loss function?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#is-the-support-for-the-r-language">Is the support for the R language?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#is-there-a-c-c-implementation">Is there a C/C++ implementation?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#i-can-t-get-umap-to-run-properly">I can’t get UMAP to run properly!</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Background on UMAP:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="how_umap_works.html">How UMAP Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarking.html">Performance Comparison of Dimension Reduction Implementations</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api.html">UMAP API Guide</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">umap</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Frequently Asked Questions</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/faq.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="frequently-asked-questions">
+<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<p>Compiled here are a set of frequently asked questions,
+along with answers. If you don’t find your question listed here
+then please feel free to add an
+<a class="reference external" href="https://github.com/lmcinnes/umap/issues/new">issue on github</a>.
+More questions are always welcome, and the authors will do
+their best to answer. If you feel you have a common question
+that isn’t answered here then please suggest that the question
+(and answer) be added to the FAQ when you file the issue.</p>
+<div class="section" id="should-i-normalise-my-features">
+<h2>Should I normalise my features?<a class="headerlink" href="#should-i-normalise-my-features" title="Permalink to this headline">¶</a></h2>
+<p>The default answer is yes, but, of course, the real answer is
+“it depends”. If your features have meaningful relationships
+with one another (say, latitude and longitude vales) then
+normalising per feature is not a good idea. For features that
+are essentially independent it does make sense to get all the
+features on (relatively) the same scale. The best way to do
+this is to use
+<a class="reference external" href="http://scikit-learn.org/stable/modules/preprocessing.html">pre-processing tools from scikit-learn</a>.
+All the advice given there applies as sensible preprocessing
+for UMAP, and since UMAP is scikit-learn compatible you
+can put all of this together into a <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">scikit-learn pipeline</a></p>
+</div>
+<div class="section" id="can-i-cluster-the-results-of-umap">
+<h2>Can I cluster the results of UMAP?<a class="headerlink" href="#can-i-cluster-the-results-of-umap" title="Permalink to this headline">¶</a></h2>
+<p>This is hard to answer well, but essentially the answer is
+“yes, with care”. To start with it matters what clustering
+algorithm you are going to use. Since UMAP does not necessarily
+produce clean spherical clusters something like K-Means
+is a poor choice. I would recommend
+<a class="reference external" href="https://github.com/scikit-learn-contrib/hdbscan">HDBSCAN</a> or
+similar. The catch here is that UMAP, with its uniform density
+assumption, does not preserve density well. What UMAP will do,
+however, is contract connected components of the manifold
+together. Providing you have enough data for UMAP to
+distinguish that information then you can get <em>useful</em>
+clustering results out since algorithms like HDBSCAN will
+easily pick out the components after applying UMAP.</p>
+<p>UMAP does offer significant improvements over algorithms
+like t-SNE for clustering. First, by preserving more
+global structure and creating meaningful separation
+between connected components of the manifold on which
+the data lies, UMAP offers more meaningful clusters.
+Second, because it supports arbitrary embedding
+dimensions, UMAP allows embedding to larger dimensional
+spaces that make it more amenable to clustering.</p>
+</div>
+<div class="section" id="the-clusters-are-all-squashed-together-and-i-can-t-see-internal-structure">
+<h2>The clusters are all squashed together and I can’t see internal structure<a class="headerlink" href="#the-clusters-are-all-squashed-together-and-i-can-t-see-internal-structure" title="Permalink to this headline">¶</a></h2>
+<p>One of UMAPs goals is to have distance between clusters of points
+be meaningful. This means that clusters can end up spread out
+with a fair amount of space between them. As a result the
+clusters themselves can end up more visually packed together
+than in, say, t-SNE. This is intended. A catch, however, is
+that many plots (for example matplotlib’s scatter plot with
+default parameters) tend to show the clusters only as indistinct
+blobs with no internal structure. The solution for this is
+really a matter of tuning the plot more than anything else.</p>
+<p>If you are using matplotlib consider using the <code class="docutils literal notranslate"><span class="pre">s</span></code> parameter
+that specifies the glyph size in scatter plots. Depending on
+how much data you have reducing this to anything from 5 to
+0.001 can have a notable effect. The <code class="docutils literal notranslate"><span class="pre">size</span></code> parameter in
+bokeh is similarly useful (but does not need to be quite so small).</p>
+<p>More generally the real solution, particular with large datasets,
+is to use <a class="reference external" href="http://datashader.org/">datashader</a> for plotting.
+Datashader is a plotting llibrary that handles aggregation
+of large scale data in scatter plots in a way that can better
+show the underlying detail that can otherwise be lost. We
+highly recommend investing the time to learn datashader for
+UMAP plot particularly for larger datasets.</p>
+</div>
+<div class="section" id="is-there-gpu-or-multicore-cpu-support">
+<h2>Is there GPU or multicore-CPU support?<a class="headerlink" href="#is-there-gpu-or-multicore-cpu-support" title="Permalink to this headline">¶</a></h2>
+<p>Not at this time. The bottlenecks in the code are the
+(approximate) nearest neighbor search and the optimization
+of the low dimensional representation. The first of these
+(ANN) is performed by a random projection forest and
+nearest-neighbor-descent. Both of those are, at the least,
+parellelisable in principle, and could be converted to
+support multicore (at the cost of single core performance).
+The optimization is performed via a (slightly custom)
+stochastic gradient descent. SGD is both parallelisable
+and amenable to GPUs. This means that in principle UMAP
+could support multicore and use GPUs for optimization.
+In practice this would involve GPU expertise and would
+potentially hurt single core performance, and so has
+been deferred for now. If you have expertise in GPU
+programming with Numba and would be interested in
+adding GPU support we would welcome your contributions.</p>
+</div>
+<div class="section" id="can-i-add-a-custom-loss-function">
+<h2>Can I add a custom loss function?<a class="headerlink" href="#can-i-add-a-custom-loss-function" title="Permalink to this headline">¶</a></h2>
+<p>To allow for fast performance the SGD phase of UMAP has
+been hand-coded for the specific needs of UMAP. This makes
+custom loss functions a little difficult to handle. Now
+that Numba (as of version 0.38) supports passing functions
+it is posisble that future versions of UMAP may support
+such functionality. In the meantime you should definitely
+look into <a class="reference external" href="https://github.com/jmelville/smallvis">smallvis</a>,
+a library for t-SNE, LargeVis, UMAP, and related algorithms.
+Smallvis only works for small datasets, but provides
+much greater flexibility and control.</p>
+</div>
+<div class="section" id="is-the-support-for-the-r-language">
+<h2>Is the support for the R language?<a class="headerlink" href="#is-the-support-for-the-r-language" title="Permalink to this headline">¶</a></h2>
+<p>Yes! A number of people have worked hard to make UMAP
+available to R users.</p>
+<p>If you want to use the reference
+implementation under the hood but want a nice R interface
+the we recommend <a class="reference external" href="https://github.com/ropenscilabs/umapr">umapr</a>
+which wraps the python code with reticulate.</p>
+<p>If you want a pure R version then there are a couple
+of options: <a class="reference external" href="https://github.com/tkonopka/umap">UMAP</a>
+and <a class="reference external" href="https://github.com/jlmelville/uwot">UWOT</a>. Both are good
+reimplementations of UMAP in R. If performance is
+a major factor we recommend UWOT at this time.</p>
+</div>
+<div class="section" id="is-there-a-c-c-implementation">
+<h2>Is there a C/C++ implementation?<a class="headerlink" href="#is-there-a-c-c-implementation" title="Permalink to this headline">¶</a></h2>
+<p>Not that we are aware of. For now Numba has done a very
+admirable job of providing high performance and the
+developers of UMAP have not felt the need to move to
+lower level languages. At some point a multithreaded
+C++ implementation may be made available, but there are
+no time-frames for when that would happen.</p>
+</div>
+<div class="section" id="i-can-t-get-umap-to-run-properly">
+<h2>I can’t get UMAP to run properly!<a class="headerlink" href="#i-can-t-get-umap-to-run-properly" title="Permalink to this headline">¶</a></h2>
+<p>There are, inevitably, a number of issues and corner cases
+that can cause issues for UMAP. Some know issues that can
+cause problems are:</p>
+<ul class="simple">
+<li>UMAP doesn’t currently support 32-bit Windows.
+This is due to issues with Numba of that platform
+and will not likely be resolved soon. Sorry :-(</li>
+<li>If you have pip installed the package <code class="docutils literal notranslate"><span class="pre">umap</span></code>
+at any time (instead of <code class="docutils literal notranslate"><span class="pre">umap-learn</span></code>) this can
+cause serious issues. You will want to purge/remove
+everything umap related in your <code class="docutils literal notranslate"><span class="pre">site-packages</span></code>
+directory and re-install <code class="docutils literal notranslate"><span class="pre">umap-learn</span></code>.</li>
+<li>Having any files called <code class="docutils literal notranslate"><span class="pre">umap.py</span></code> in the current
+directory you will have issues as that will be
+loaded instead of the <code class="docutils literal notranslate"><span class="pre">umap</span></code> module.</li>
+</ul>
+<p>It is worth checking the
+<a class="reference external" href="https://github.com/lmcinnes/umap/issues">issues page on github</a>
+for potential solutions. If all else fails please add an
+<a class="reference external" href="https://github.com/lmcinnes/umap/issues/new">issue on github</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="how_umap_works.html" class="btn btn-neutral float-right" title="How UMAP Works" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="auto_examples/plot_algorithm_comparison.html" class="btn btn-neutral" title="Comparison of Dimension Reduction Techniques" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Leland McInnes.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

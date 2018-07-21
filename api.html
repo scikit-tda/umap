@@ -1,0 +1,1107 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>UMAP API Guide &mdash; umap 0.3 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/gallery.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Performance Comparison of Dimension Reduction Implementations" href="benchmarking.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> umap
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">User Guide / Tutorial:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="basic_usage.html">How to Use UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameters.html">Basic UMAP Parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transform.html">Transforming New Data with UMAP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="supervised.html">UMAP for Supervised Dimension Reduction and Metric Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="clustering.html">Using UMAP for Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Gallery of Examples of UMAP usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently Asked Questions</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Background on UMAP:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="how_umap_works.html">How UMAP Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarking.html">Performance Comparison of Dimension Reduction Implementations</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">UMAP API Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#umap">UMAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-umap.umap_">Useful Functions</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">umap</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>UMAP API Guide</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="umap-api-guide">
+<h1>UMAP API Guide<a class="headerlink" href="#umap-api-guide" title="Permalink to this headline">¶</a></h1>
+<p>UMAP has only a single class <code class="xref py py-class docutils literal notranslate"><span class="pre">UMAP</span></code>.</p>
+<div class="section" id="umap">
+<h2>UMAP<a class="headerlink" href="#umap" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="umap.umap_.UMAP">
+<em class="property">class </em><code class="descclassname">umap.umap_.</code><code class="descname">UMAP</code><span class="sig-paren">(</span><em>n_neighbors=15</em>, <em>n_components=2</em>, <em>metric='euclidean'</em>, <em>n_epochs=None</em>, <em>learning_rate=1.0</em>, <em>init='spectral'</em>, <em>min_dist=0.1</em>, <em>spread=1.0</em>, <em>set_op_mix_ratio=1.0</em>, <em>local_connectivity=1.0</em>, <em>repulsion_strength=1.0</em>, <em>negative_sample_rate=5</em>, <em>transform_queue_size=4.0</em>, <em>a=None</em>, <em>b=None</em>, <em>random_state=None</em>, <em>metric_kwds=None</em>, <em>angular_rp_forest=False</em>, <em>target_n_neighbors=-1</em>, <em>target_metric='categorical'</em>, <em>target_metric_kwds=None</em>, <em>target_weight=0.5</em>, <em>transform_seed=42</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#UMAP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.UMAP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uniform Manifold Approximation and Projection</p>
+<p>Finds a low dimensional embedding of the data that approximates
+an underlying manifold.</p>
+<dl class="docutils">
+<dt>n_neighbors: float (optional, default 15)</dt>
+<dd>The size of local neighborhood (in terms of number of neighboring
+sample points) used for manifold approximation. Larger values
+result in more global views of the manifold, while smaller
+values result in more local data being preserved. In general
+values should be in the range 2 to 100.</dd>
+<dt>n_components: int (optional, default 2)</dt>
+<dd>The dimension of the space to embed into. This defaults to 2 to
+provide easy visualization, but can reasonably be set to any
+integer value in the range 2 to 100.</dd>
+<dt>metric: string or function (optional, default ‘euclidean’)</dt>
+<dd><p class="first">The metric to use to compute distances in high dimensional space.
+If a string is passed it must match a valid predefined metric. If
+a general metric is required a function that takes two 1d arrays and
+returns a float can be provided. For performance purposes it is
+required that this be a numba jit’d function. Valid string metrics
+include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>euclidean</li>
+<li>manhattan</li>
+<li>chebyshev</li>
+<li>minkowski</li>
+<li>canberra</li>
+<li>braycurtis</li>
+<li>mahalanobis</li>
+<li>wminkowski</li>
+<li>seuclidean</li>
+<li>cosine</li>
+<li>correlation</li>
+<li>haversine</li>
+<li>hamming</li>
+<li>jaccard</li>
+<li>dice</li>
+<li>russelrao</li>
+<li>kulsinski</li>
+<li>rogerstanimoto</li>
+<li>sokalmichener</li>
+<li>sokalsneath</li>
+<li>yule</li>
+</ul>
+</div></blockquote>
+<p class="last">Metrics that take arguments (such as minkowski, mahalanobis etc.)
+can have arguments passed via the metric_kwds dictionary. At this
+time care must be taken and dictionary elements must be ordered
+appropriately; this will hopefully be fixed in the future.</p>
+</dd>
+<dt>n_epochs: int (optional, default None)</dt>
+<dd>The number of training epochs to be used in optimizing the
+low dimensional embedding. Larger values result in more accurate
+embeddings. If None is specified a value will be selected based on
+the size of the input dataset (200 for large datasets, 500 for small).</dd>
+<dt>learning_rate: float (optional, default 1.0)</dt>
+<dd>The initial learning rate for the embedding optimization.</dd>
+<dt>init: string (optional, default ‘spectral’)</dt>
+<dd><dl class="first last docutils">
+<dt>How to initialize the low dimensional embedding. Options are:</dt>
+<dd><ul class="first last simple">
+<li>‘spectral’: use a spectral embedding of the fuzzy 1-skeleton</li>
+<li>‘random’: assign initial embedding positions at random.</li>
+<li>A numpy array of initial embedding positions.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>min_dist: float (optional, default 0.1)</dt>
+<dd>The effective minimum distance between embedded points. Smaller values
+will result in a more clustered/clumped embedding where nearby points
+on the manifold are drawn closer together, while larger values will
+result on a more even dispersal of points. The value should be set
+relative to the <code class="docutils literal notranslate"><span class="pre">spread</span></code> value, which determines the scale at which
+embedded points will be spread out.</dd>
+<dt>spread: float (optional, default 1.0)</dt>
+<dd>The effective scale of embedded points. In combination with <code class="docutils literal notranslate"><span class="pre">min_dist</span></code>
+this determines how clustered/clumped the embedded points are.</dd>
+<dt>set_op_mix_ratio: float (optional, default 1.0)</dt>
+<dd>Interpolate between (fuzzy) union and intersection as the set operation
+used to combine local fuzzy simplicial sets to obtain a global fuzzy
+simplicial sets. Both fuzzy set operations use the product t-norm.
+The value of this parameter should be between 0.0 and 1.0; a value of
+1.0 will use a pure fuzzy union, while 0.0 will use a pure fuzzy
+intersection.</dd>
+<dt>local_connectivity: int (optional, default 1)</dt>
+<dd>The local connectivity required – i.e. the number of nearest
+neighbors that should be assumed to be connected at a local level.
+The higher this value the more connected the manifold becomes
+locally. In practice this should be not more than the local intrinsic
+dimension of the manifold.</dd>
+<dt>repulsion_strength: float (optional, default 1.0)</dt>
+<dd>Weighting applied to negative samples in low dimensional embedding
+optimization. Values higher than one will result in greater weight
+being given to negative samples.</dd>
+<dt>negative_sample_rate: int (optional, default 5)</dt>
+<dd>The number of negative samples to select per positive sample
+in the optimization process. Increasing this value will result
+in greater repulsive force being applied, greater optimization
+cost, but slightly more accuracy.</dd>
+<dt>transform_queue_size: float (optional, default 4.0)</dt>
+<dd>For transform operations (embedding new points using a trained <a href="#id1"><span class="problematic" id="id2">model_</span></a>
+this will control how aggressively to search for nearest neighbors.
+Larger values will result in slower performance but more accurate
+nearest neighbor evaluation.</dd>
+<dt>a: float (optional, default None)</dt>
+<dd>More specific parameters controlling the embedding. If None these
+values are set automatically as determined by <code class="docutils literal notranslate"><span class="pre">min_dist</span></code> and
+<code class="docutils literal notranslate"><span class="pre">spread</span></code>.</dd>
+<dt>b: float (optional, default None)</dt>
+<dd>More specific parameters controlling the embedding. If None these
+values are set automatically as determined by <code class="docutils literal notranslate"><span class="pre">min_dist</span></code> and
+<code class="docutils literal notranslate"><span class="pre">spread</span></code>.</dd>
+<dt>random_state: int, RandomState instance or None, optional (default: None)</dt>
+<dd>If int, random_state is the seed used by the random number generator;
+If RandomState instance, random_state is the random number generator;
+If None, the random number generator is the RandomState instance used
+by <cite>np.random</cite>.</dd>
+<dt>metric_kwds: dict (optional, default None)</dt>
+<dd>Arguments to pass on to the metric, such as the <code class="docutils literal notranslate"><span class="pre">p</span></code> value for
+Minkowski distance. If None then no arguments are passed on.</dd>
+<dt>angular_rp_forest: bool (optional, default False)</dt>
+<dd>Whether to use an angular random projection forest to initialise
+the approximate nearest neighbor search. This can be faster, but is
+mostly on useful for metric that use an angular style distance such
+as cosine, correlation etc. In the case of those metrics angular forests
+will be chosen automatically.</dd>
+<dt>target_n_neighbors: int (optional, default -1)</dt>
+<dd>The number of nearest neighbors to use to construct the target simplcial
+set. If set to -1 use the <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> value.</dd>
+<dt>target_metric: string or callable (optional, default ‘categorical’)</dt>
+<dd>The metric used to measure distance for a target array is using supervised
+dimension reduction. By default this is ‘categorical’ which will measure
+distance in terms of whether categories match or are different. Furthermore,
+if semi-supervised is required target values of -1 will be trated as
+unlabelled under the ‘categorical’ metric. If the target array takes
+continuous values (e.g. for a regression problem) then metric of ‘l1’
+or ‘l2’ is probably more appropriate.</dd>
+<dt>target_metric_kwds: dict (optional, default None)</dt>
+<dd>Keyword argument to pass to the target metric when performing
+supervised dimension reduction. If None then no arguments are passed on.</dd>
+<dt>target_weight: float (optional, default 0.5)</dt>
+<dd>weighting factor between data topology and target topology. A value of
+0.0 weights entirely on data, a value of 1.0 weights entirely on target.
+The default of 0.5 balances the weighting equally between data and target.</dd>
+<dt>transform_seed: int (optional, default 42)</dt>
+<dd>Random seed used for the stochastic aspects of the transform operation.
+This ensures consistency in transform operations.</dd>
+<dt>verbose: bool (optional, default False)</dt>
+<dd>Controls verbosity of logging.</dd>
+</dl>
+<dl class="method">
+<dt id="umap.umap_.UMAP.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#UMAP.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.UMAP.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit X into an embedded space.</p>
+<p>Optionally use y for supervised dimension reduction.</p>
+<dl class="docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_features) or (n_samples, n_samples)</span></dt>
+<dd>If the metric is ‘precomputed’ X must be a square distance
+matrix. Otherwise it contains a sample per row. If the method
+is ‘exact’, X may be a sparse matrix of type ‘csr’, ‘csc’
+or ‘coo’.</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples)</span></dt>
+<dd>A target array for supervised dimension reduction. How this is
+handled is determined by parameters UMAP was instantiated with.
+The relevant attributes are <code class="docutils literal notranslate"><span class="pre">target_metric</span></code> and
+<code class="docutils literal notranslate"><span class="pre">target_metric_kwds</span></code>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="umap.umap_.UMAP.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#UMAP.fit_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.UMAP.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit X into an embedded space and return that transformed
+output.</p>
+<dl class="docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_features) or (n_samples, n_samples)</span></dt>
+<dd>If the metric is ‘precomputed’ X must be a square distance
+matrix. Otherwise it contains a sample per row.</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples)</span></dt>
+<dd>A target array for supervised dimension reduction. How this is
+handled is determined by parameters UMAP was instantiated with.
+The relevant attributes are <code class="docutils literal notranslate"><span class="pre">target_metric</span></code> and
+<code class="docutils literal notranslate"><span class="pre">target_metric_kwds</span></code>.</dd>
+</dl>
+<dl class="docutils">
+<dt>X_new <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_components)</span></dt>
+<dd>Embedding of the training data in low-dimensional space.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="umap.umap_.UMAP.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#UMAP.transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.UMAP.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform X into the existing embedded space and return that
+transformed output.</p>
+<dl class="docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_features)</span></dt>
+<dd>New data to be transformed.</dd>
+</dl>
+<dl class="docutils">
+<dt>X_new <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_components)</span></dt>
+<dd>Embedding of the new data in low-dimensional space.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p>A number of internal functions can also be accessed separately for more fine tuned work.</p>
+</div>
+<div class="section" id="module-umap.umap_">
+<span id="useful-functions"></span><h2>Useful Functions<a class="headerlink" href="#module-umap.umap_" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">umap.umap_.</code><code class="descname">UMAP</code><span class="sig-paren">(</span><em>n_neighbors=15</em>, <em>n_components=2</em>, <em>metric='euclidean'</em>, <em>n_epochs=None</em>, <em>learning_rate=1.0</em>, <em>init='spectral'</em>, <em>min_dist=0.1</em>, <em>spread=1.0</em>, <em>set_op_mix_ratio=1.0</em>, <em>local_connectivity=1.0</em>, <em>repulsion_strength=1.0</em>, <em>negative_sample_rate=5</em>, <em>transform_queue_size=4.0</em>, <em>a=None</em>, <em>b=None</em>, <em>random_state=None</em>, <em>metric_kwds=None</em>, <em>angular_rp_forest=False</em>, <em>target_n_neighbors=-1</em>, <em>target_metric='categorical'</em>, <em>target_metric_kwds=None</em>, <em>target_weight=0.5</em>, <em>transform_seed=42</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#UMAP"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Uniform Manifold Approximation and Projection</p>
+<p>Finds a low dimensional embedding of the data that approximates
+an underlying manifold.</p>
+<dl class="docutils">
+<dt>n_neighbors: float (optional, default 15)</dt>
+<dd>The size of local neighborhood (in terms of number of neighboring
+sample points) used for manifold approximation. Larger values
+result in more global views of the manifold, while smaller
+values result in more local data being preserved. In general
+values should be in the range 2 to 100.</dd>
+<dt>n_components: int (optional, default 2)</dt>
+<dd>The dimension of the space to embed into. This defaults to 2 to
+provide easy visualization, but can reasonably be set to any
+integer value in the range 2 to 100.</dd>
+<dt>metric: string or function (optional, default ‘euclidean’)</dt>
+<dd><p class="first">The metric to use to compute distances in high dimensional space.
+If a string is passed it must match a valid predefined metric. If
+a general metric is required a function that takes two 1d arrays and
+returns a float can be provided. For performance purposes it is
+required that this be a numba jit’d function. Valid string metrics
+include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>euclidean</li>
+<li>manhattan</li>
+<li>chebyshev</li>
+<li>minkowski</li>
+<li>canberra</li>
+<li>braycurtis</li>
+<li>mahalanobis</li>
+<li>wminkowski</li>
+<li>seuclidean</li>
+<li>cosine</li>
+<li>correlation</li>
+<li>haversine</li>
+<li>hamming</li>
+<li>jaccard</li>
+<li>dice</li>
+<li>russelrao</li>
+<li>kulsinski</li>
+<li>rogerstanimoto</li>
+<li>sokalmichener</li>
+<li>sokalsneath</li>
+<li>yule</li>
+</ul>
+</div></blockquote>
+<p class="last">Metrics that take arguments (such as minkowski, mahalanobis etc.)
+can have arguments passed via the metric_kwds dictionary. At this
+time care must be taken and dictionary elements must be ordered
+appropriately; this will hopefully be fixed in the future.</p>
+</dd>
+<dt>n_epochs: int (optional, default None)</dt>
+<dd>The number of training epochs to be used in optimizing the
+low dimensional embedding. Larger values result in more accurate
+embeddings. If None is specified a value will be selected based on
+the size of the input dataset (200 for large datasets, 500 for small).</dd>
+<dt>learning_rate: float (optional, default 1.0)</dt>
+<dd>The initial learning rate for the embedding optimization.</dd>
+<dt>init: string (optional, default ‘spectral’)</dt>
+<dd><dl class="first last docutils">
+<dt>How to initialize the low dimensional embedding. Options are:</dt>
+<dd><ul class="first last simple">
+<li>‘spectral’: use a spectral embedding of the fuzzy 1-skeleton</li>
+<li>‘random’: assign initial embedding positions at random.</li>
+<li>A numpy array of initial embedding positions.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>min_dist: float (optional, default 0.1)</dt>
+<dd>The effective minimum distance between embedded points. Smaller values
+will result in a more clustered/clumped embedding where nearby points
+on the manifold are drawn closer together, while larger values will
+result on a more even dispersal of points. The value should be set
+relative to the <code class="docutils literal notranslate"><span class="pre">spread</span></code> value, which determines the scale at which
+embedded points will be spread out.</dd>
+<dt>spread: float (optional, default 1.0)</dt>
+<dd>The effective scale of embedded points. In combination with <code class="docutils literal notranslate"><span class="pre">min_dist</span></code>
+this determines how clustered/clumped the embedded points are.</dd>
+<dt>set_op_mix_ratio: float (optional, default 1.0)</dt>
+<dd>Interpolate between (fuzzy) union and intersection as the set operation
+used to combine local fuzzy simplicial sets to obtain a global fuzzy
+simplicial sets. Both fuzzy set operations use the product t-norm.
+The value of this parameter should be between 0.0 and 1.0; a value of
+1.0 will use a pure fuzzy union, while 0.0 will use a pure fuzzy
+intersection.</dd>
+<dt>local_connectivity: int (optional, default 1)</dt>
+<dd>The local connectivity required – i.e. the number of nearest
+neighbors that should be assumed to be connected at a local level.
+The higher this value the more connected the manifold becomes
+locally. In practice this should be not more than the local intrinsic
+dimension of the manifold.</dd>
+<dt>repulsion_strength: float (optional, default 1.0)</dt>
+<dd>Weighting applied to negative samples in low dimensional embedding
+optimization. Values higher than one will result in greater weight
+being given to negative samples.</dd>
+<dt>negative_sample_rate: int (optional, default 5)</dt>
+<dd>The number of negative samples to select per positive sample
+in the optimization process. Increasing this value will result
+in greater repulsive force being applied, greater optimization
+cost, but slightly more accuracy.</dd>
+<dt>transform_queue_size: float (optional, default 4.0)</dt>
+<dd>For transform operations (embedding new points using a trained <a href="#id3"><span class="problematic" id="id4">model_</span></a>
+this will control how aggressively to search for nearest neighbors.
+Larger values will result in slower performance but more accurate
+nearest neighbor evaluation.</dd>
+<dt>a: float (optional, default None)</dt>
+<dd>More specific parameters controlling the embedding. If None these
+values are set automatically as determined by <code class="docutils literal notranslate"><span class="pre">min_dist</span></code> and
+<code class="docutils literal notranslate"><span class="pre">spread</span></code>.</dd>
+<dt>b: float (optional, default None)</dt>
+<dd>More specific parameters controlling the embedding. If None these
+values are set automatically as determined by <code class="docutils literal notranslate"><span class="pre">min_dist</span></code> and
+<code class="docutils literal notranslate"><span class="pre">spread</span></code>.</dd>
+<dt>random_state: int, RandomState instance or None, optional (default: None)</dt>
+<dd>If int, random_state is the seed used by the random number generator;
+If RandomState instance, random_state is the random number generator;
+If None, the random number generator is the RandomState instance used
+by <cite>np.random</cite>.</dd>
+<dt>metric_kwds: dict (optional, default None)</dt>
+<dd>Arguments to pass on to the metric, such as the <code class="docutils literal notranslate"><span class="pre">p</span></code> value for
+Minkowski distance. If None then no arguments are passed on.</dd>
+<dt>angular_rp_forest: bool (optional, default False)</dt>
+<dd>Whether to use an angular random projection forest to initialise
+the approximate nearest neighbor search. This can be faster, but is
+mostly on useful for metric that use an angular style distance such
+as cosine, correlation etc. In the case of those metrics angular forests
+will be chosen automatically.</dd>
+<dt>target_n_neighbors: int (optional, default -1)</dt>
+<dd>The number of nearest neighbors to use to construct the target simplcial
+set. If set to -1 use the <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> value.</dd>
+<dt>target_metric: string or callable (optional, default ‘categorical’)</dt>
+<dd>The metric used to measure distance for a target array is using supervised
+dimension reduction. By default this is ‘categorical’ which will measure
+distance in terms of whether categories match or are different. Furthermore,
+if semi-supervised is required target values of -1 will be trated as
+unlabelled under the ‘categorical’ metric. If the target array takes
+continuous values (e.g. for a regression problem) then metric of ‘l1’
+or ‘l2’ is probably more appropriate.</dd>
+<dt>target_metric_kwds: dict (optional, default None)</dt>
+<dd>Keyword argument to pass to the target metric when performing
+supervised dimension reduction. If None then no arguments are passed on.</dd>
+<dt>target_weight: float (optional, default 0.5)</dt>
+<dd>weighting factor between data topology and target topology. A value of
+0.0 weights entirely on data, a value of 1.0 weights entirely on target.
+The default of 0.5 balances the weighting equally between data and target.</dd>
+<dt>transform_seed: int (optional, default 42)</dt>
+<dd>Random seed used for the stochastic aspects of the transform operation.
+This ensures consistency in transform operations.</dd>
+<dt>verbose: bool (optional, default False)</dt>
+<dd>Controls verbosity of logging.</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#UMAP.fit"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Fit X into an embedded space.</p>
+<p>Optionally use y for supervised dimension reduction.</p>
+<dl class="docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_features) or (n_samples, n_samples)</span></dt>
+<dd>If the metric is ‘precomputed’ X must be a square distance
+matrix. Otherwise it contains a sample per row. If the method
+is ‘exact’, X may be a sparse matrix of type ‘csr’, ‘csc’
+or ‘coo’.</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples)</span></dt>
+<dd>A target array for supervised dimension reduction. How this is
+handled is determined by parameters UMAP was instantiated with.
+The relevant attributes are <code class="docutils literal notranslate"><span class="pre">target_metric</span></code> and
+<code class="docutils literal notranslate"><span class="pre">target_metric_kwds</span></code>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#UMAP.fit_transform"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Fit X into an embedded space and return that transformed
+output.</p>
+<dl class="docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_features) or (n_samples, n_samples)</span></dt>
+<dd>If the metric is ‘precomputed’ X must be a square distance
+matrix. Otherwise it contains a sample per row.</dd>
+<dt>y <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples)</span></dt>
+<dd>A target array for supervised dimension reduction. How this is
+handled is determined by parameters UMAP was instantiated with.
+The relevant attributes are <code class="docutils literal notranslate"><span class="pre">target_metric</span></code> and
+<code class="docutils literal notranslate"><span class="pre">target_metric_kwds</span></code>.</dd>
+</dl>
+<dl class="docutils">
+<dt>X_new <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_components)</span></dt>
+<dd>Embedding of the training data in low-dimensional space.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#UMAP.transform"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Transform X into the existing embedded space and return that
+transformed output.</p>
+<dl class="docutils">
+<dt>X <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_features)</span></dt>
+<dd>New data to be transformed.</dd>
+</dl>
+<dl class="docutils">
+<dt>X_new <span class="classifier-delimiter">:</span> <span class="classifier">array, shape (n_samples, n_components)</span></dt>
+<dd>Embedding of the new data in low-dimensional space.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.categorical_simplicial_set_intersection">
+<code class="descclassname">umap.umap_.</code><code class="descname">categorical_simplicial_set_intersection</code><a class="reference internal" href="_modules/umap/umap_.html#categorical_simplicial_set_intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.categorical_simplicial_set_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combine a fuzzy simplicial set with another fuzzy simplicial set
+generated from categorical data using categorical distances. The target
+data is assumed to be categorical label data (a vector of labels),
+and this will update the fuzzy simplicial set to respect that label data.</p>
+<p>TODO: optional category cardinality based weighting of distance</p>
+<dl class="docutils">
+<dt>simplicial_set: sparse matrix</dt>
+<dd>The input fuzzy simplicial set.</dd>
+<dt>target: array of shape (n_samples)</dt>
+<dd>The categorical labels to use in the intersection.</dd>
+<dt>unknown_dist: float (optional, default 1.0)</dt>
+<dd>The distance an unknown label (-1) is assumed to be from any point.</dd>
+<dt>far_dist float (optional, default 5.0)</dt>
+<dd>The distance between unmatched labels.</dd>
+</dl>
+<dl class="docutils">
+<dt>simplicial_set: sparse matrix</dt>
+<dd>The resulting intersected fuzzy simplicial set.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.clip">
+<code class="descclassname">umap.umap_.</code><code class="descname">clip</code><a class="reference internal" href="_modules/umap/umap_.html#clip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.clip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard clamping of a value into a fixed range (in this case -4.0 to
+4.0)</p>
+<dl class="docutils">
+<dt>val: float</dt>
+<dd>The value to be clamped.</dd>
+</dl>
+<p>The clamped value, now fixed to be in the range -4.0 to 4.0.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.compute_membership_strengths">
+<code class="descclassname">umap.umap_.</code><code class="descname">compute_membership_strengths</code><a class="reference internal" href="_modules/umap/umap_.html#compute_membership_strengths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.compute_membership_strengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct the membership strength data for the 1-skeleton of each local
+fuzzy simplicial set – this is formed as a sparse matrix where each row is
+a local fuzzy simplicial set, with a membership strength for the
+1-simplex to each other data point.</p>
+<dl class="docutils">
+<dt>knn_indices: array of shape (n_samples, n_neighbors)</dt>
+<dd>The indices on the <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> closest points in the dataset.</dd>
+<dt>knn_dists: array of shape (n_samples, n_neighbors)</dt>
+<dd>The distances to the <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> closest points in the dataset.</dd>
+<dt>sigmas: array of shape(n_samples)</dt>
+<dd>The normalization factor derived from the metric tensor approximation.</dd>
+<dt>rhos: array of shape(n_samples)</dt>
+<dd>The local connectivity adjustment.</dd>
+</dl>
+<dl class="docutils">
+<dt>rows: array of shape (n_samples * n_neighbors)</dt>
+<dd>Row data for the resulting sparse matrix (coo format)</dd>
+<dt>cols: array of shape (n_samples * n_neighbors)</dt>
+<dd>Column data for the resulting sparse matrix (coo format)</dd>
+<dt>vals: array of shape (n_samples * n_neighbors)</dt>
+<dd>Entries for the resulting sparse matrix (coo format)</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.fast_intersection">
+<code class="descclassname">umap.umap_.</code><code class="descname">fast_intersection</code><a class="reference internal" href="_modules/umap/umap_.html#fast_intersection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.fast_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Under the assumption of categorical distance for the intersecting
+simplicial set perform a fast intersection.</p>
+<dl class="docutils">
+<dt>rows: array</dt>
+<dd>An array of the row of each non-zero in the sparse matrix
+representation.</dd>
+<dt>cols: array</dt>
+<dd>An array of the column of each non-zero in the sparse matrix
+representation.</dd>
+<dt>values: array</dt>
+<dd>An array of the value of each non-zero in the sparse matrix
+representation.</dd>
+<dt>target: array of shape (n_samples)</dt>
+<dd>The categorical labels to use in the intersection.</dd>
+<dt>unknown_dist: float (optional, default 1.0)</dt>
+<dd>The distance an unknown label (-1) is assumed to be from any point.</dd>
+<dt>far_dist float (optional, default 5.0)</dt>
+<dd>The distance between unmatched labels.</dd>
+</dl>
+<dl class="docutils">
+<dt>simplicial_set: sparse matrix</dt>
+<dd>The resulting intersected fuzzy simplicial set.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="umap.umap_.find_ab_params">
+<code class="descclassname">umap.umap_.</code><code class="descname">find_ab_params</code><span class="sig-paren">(</span><em>spread</em>, <em>min_dist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#find_ab_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.find_ab_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit a, b params for the differentiable curve used in lower
+dimensional fuzzy simplicial complex construction. We want the
+smooth curve (from a pre-defined family with simple gradient) that
+best matches an offset exponential decay.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.fuzzy_simplicial_set">
+<code class="descclassname">umap.umap_.</code><code class="descname">fuzzy_simplicial_set</code><a class="reference internal" href="_modules/umap/umap_.html#fuzzy_simplicial_set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.fuzzy_simplicial_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a set of data X, a neighborhood size, and a measure of distance
+compute the fuzzy simplicial set (here represented as a fuzzy graph in
+the form of a sparse matrix) associated to the data. This is done by
+locally approximating geodesic distance at each point, creating a fuzzy
+simplicial set for each such point, and then combining all the local
+fuzzy simplicial sets into a global one via a fuzzy union.</p>
+<dl class="docutils">
+<dt>X: array of shape (n_samples, n_features)</dt>
+<dd>The data to be modelled as a fuzzy simplicial set.</dd>
+<dt>n_neighbors: int</dt>
+<dd>The number of neighbors to use to approximate geodesic distance.
+Larger numbers induce more global estimates of the manifold that can
+miss finer detail, while smaller values will focus on fine manifold
+structure to the detriment of the larger picture.</dd>
+<dt>random_state: numpy RandomState or equivalent</dt>
+<dd>A state capable being used as a numpy random state.</dd>
+<dt>metric: string or function (optional, default ‘euclidean’)</dt>
+<dd><p class="first">The metric to use to compute distances in high dimensional space.
+If a string is passed it must match a valid predefined metric. If
+a general metric is required a function that takes two 1d arrays and
+returns a float can be provided. For performance purposes it is
+required that this be a numba jit’d function. Valid string metrics
+include:</p>
+<blockquote>
+<div><ul class="simple">
+<li>euclidean</li>
+<li>manhattan</li>
+<li>chebyshev</li>
+<li>minkowski</li>
+<li>canberra</li>
+<li>braycurtis</li>
+<li>mahalanobis</li>
+<li>wminkowski</li>
+<li>seuclidean</li>
+<li>cosine</li>
+<li>correlation</li>
+<li>haversine</li>
+<li>hamming</li>
+<li>jaccard</li>
+<li>dice</li>
+<li>russelrao</li>
+<li>kulsinski</li>
+<li>rogerstanimoto</li>
+<li>sokalmichener</li>
+<li>sokalsneath</li>
+<li>yule</li>
+</ul>
+</div></blockquote>
+<p class="last">Metrics that take arguments (such as minkowski, mahalanobis etc.)
+can have arguments passed via the metric_kwds dictionary. At this
+time care must be taken and dictionary elements must be ordered
+appropriately; this will hopefully be fixed in the future.</p>
+</dd>
+<dt>metric_kwds: dict (optional, default {})</dt>
+<dd>Arguments to pass on to the metric, such as the <code class="docutils literal notranslate"><span class="pre">p</span></code> value for
+Minkowski distance.</dd>
+<dt>knn_indices: array of shape (n_samples, n_neighbors) (optional)</dt>
+<dd>If the k-nearest neighbors of each point has already been calculated
+you can pass them in here to save computation time. This should be
+an array with the indices of the k-nearest neighbors as a row for
+each data point.</dd>
+<dt>knn_dists: array of shape (n_samples, n_neighbors) (optional)</dt>
+<dd>If the k-nearest neighbors of each point has already been calculated
+you can pass them in here to save computation time. This should be
+an array with the distances of the k-nearest neighbors as a row for
+each data point.</dd>
+<dt>angular: bool (optional, default False)</dt>
+<dd>Whether to use angular/cosine distance for the random projection
+forest for seeding NN-descent to determine approximate nearest
+neighbors.</dd>
+<dt>set_op_mix_ratio: float (optional, default 1.0)</dt>
+<dd>Interpolate between (fuzzy) union and intersection as the set operation
+used to combine local fuzzy simplicial sets to obtain a global fuzzy
+simplicial sets. Both fuzzy set operations use the product t-norm.
+The value of this parameter should be between 0.0 and 1.0; a value of
+1.0 will use a pure fuzzy union, while 0.0 will use a pure fuzzy
+intersection.</dd>
+<dt>local_connectivity: int (optional, default 1)</dt>
+<dd>The local connectivity required – i.e. the number of nearest
+neighbors that should be assumed to be connected at a local level.
+The higher this value the more connected the manifold becomes
+locally. In practice this should be not more than the local intrinsic
+dimension of the manifold.</dd>
+<dt>verbose: bool (optional, default False)</dt>
+<dd>Whether to report information on the current progress of the algorithm.</dd>
+</dl>
+<dl class="docutils">
+<dt>fuzzy_simplicial_set: coo_matrix</dt>
+<dd>A fuzzy simplicial set represented as a sparse matrix. The (i,
+j) entry of the matrix represents the membership strength of the
+1-simplex between the ith and jth sample points.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.init_transform">
+<code class="descclassname">umap.umap_.</code><code class="descname">init_transform</code><a class="reference internal" href="_modules/umap/umap_.html#init_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.init_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given indices and weights and an original embeddings
+initialize the positions of new points relative to the
+indices and weights (of their neighbors in the source data).</p>
+<dl class="docutils">
+<dt>indices: array of shape (n_new_samples, n_neighbors)</dt>
+<dd>The indices of the neighbors of each new sample</dd>
+<dt>weights: array of shape (n_new_samples, n_neighbors)</dt>
+<dd>The membership strengths of associated 1-simplices
+for each of the new samples.</dd>
+<dt>embedding: array of shape (n_samples, dim)</dt>
+<dd>The original embedding of the source data.</dd>
+</dl>
+<dl class="docutils">
+<dt>new_embedding: array of shape (n_new_samples, dim)</dt>
+<dd>An initial embedding of the new sample points.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.make_epochs_per_sample">
+<code class="descclassname">umap.umap_.</code><code class="descname">make_epochs_per_sample</code><a class="reference internal" href="_modules/umap/umap_.html#make_epochs_per_sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.make_epochs_per_sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given a set of weights and number of epochs generate the number of
+epochs per sample for each weight.</p>
+<dl class="docutils">
+<dt>weights: array of shape (n_1_simplices)</dt>
+<dd>The weights ofhow much we wish to sample each 1-simplex.</dd>
+<dt>n_epochs: int</dt>
+<dd>The total number of epochs we want to train for.</dd>
+</dl>
+<p>An array of number of epochs per sample, one for each 1-simplex.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="umap.umap_.nearest_neighbors">
+<code class="descclassname">umap.umap_.</code><code class="descname">nearest_neighbors</code><span class="sig-paren">(</span><em>X</em>, <em>n_neighbors</em>, <em>metric</em>, <em>metric_kwds</em>, <em>angular</em>, <em>random_state</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#nearest_neighbors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.nearest_neighbors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> nearest points for each data point in <code class="docutils literal notranslate"><span class="pre">X</span></code>
+under <code class="docutils literal notranslate"><span class="pre">metric</span></code>. This may be exact, but more likely is approximated via
+nearest neighbor descent.</p>
+<dl class="docutils">
+<dt>X: array of shape (n_samples, n_features)</dt>
+<dd>The input data to compute the k-neighbor graph of.</dd>
+<dt>n_neighbors: int</dt>
+<dd>The number of nearest neighbors to compute for each sample in <code class="docutils literal notranslate"><span class="pre">X</span></code>.</dd>
+<dt>metric: string or callable</dt>
+<dd>The metric to use for the computation.</dd>
+<dt>metric_kwds: dict</dt>
+<dd>Any arguments to pass to the metric computation function.</dd>
+<dt>angular: bool</dt>
+<dd>Whether to use angular rp trees in NN approximation.</dd>
+<dt>random_state: np.random state</dt>
+<dd>The random state to use for approximate NN computations.</dd>
+<dt>verbose: bool</dt>
+<dd>Whether to print status data during the computation.</dd>
+</dl>
+<dl class="docutils">
+<dt>knn_indices: array of shape (n_samples, n_neighbors)</dt>
+<dd>The indices on the <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> closest points in the dataset.</dd>
+<dt>knn_dists: array of shape (n_samples, n_neighbors)</dt>
+<dd>The distances to the <code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> closest points in the dataset.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.optimize_layout">
+<code class="descclassname">umap.umap_.</code><code class="descname">optimize_layout</code><a class="reference internal" href="_modules/umap/umap_.html#optimize_layout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.optimize_layout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Improve an embedding using stochastic gradient descent to minimize the
+fuzzy set cross entropy between the 1-skeletons of the high dimensional
+and low dimensional fuzzy simplicial sets. In practice this is done by
+sampling edges based on their membership strength (with the (1-p) terms
+coming from negative sampling similar to word2vec).</p>
+<dl class="docutils">
+<dt>head_embedding: array of shape (n_samples, n_components)</dt>
+<dd>The initial embedding to be improved by SGD.</dd>
+<dt>tail_embedding: array of shape (source_samples, n_components)</dt>
+<dd>The reference embedding of embedded points. If not embedding new
+previously unseen points with respect to an existing embedding this
+is simply the head_embedding (again); otherwise it provides the
+existing embedding to embed with respect to.</dd>
+<dt>head: array of shape (n_1_simplices)</dt>
+<dd>The indices of the heads of 1-simplices with non-zero membership.</dd>
+<dt>tail: array of shape (n_1_simplices)</dt>
+<dd>The indices of the tails of 1-simplices with non-zero membership.</dd>
+<dt>n_epochs: int</dt>
+<dd>The number of training epochs to use in optimization.</dd>
+<dt>n_vertices: int</dt>
+<dd>The number of vertices (0-simplices) in the dataset.</dd>
+<dt>epochs_per_samples: array of shape (n_1_simplices)</dt>
+<dd>A float value of the number of epochs per 1-simplex. 1-simplices with
+weaker membership strength will have more epochs between being sampled.</dd>
+<dt>a: float</dt>
+<dd>Parameter of differentiable approximation of right adjoint functor</dd>
+<dt>b: float</dt>
+<dd>Parameter of differentiable approximation of right adjoint functor</dd>
+<dt>rng_state: array of int64, shape (3,)</dt>
+<dd>The internal state of the rng</dd>
+<dt>gamma: float (optional, default 1.0)</dt>
+<dd>Weight to apply to negative samples.</dd>
+<dt>initial_alpha: float (optional, default 1.0)</dt>
+<dd>Initial learning rate for the SGD.</dd>
+<dt>negative_sample_rate: int (optional, default 5)</dt>
+<dd>Number of negative samples to use per positive sample.</dd>
+<dt>verbose: bool (optional, default False)</dt>
+<dd>Whether to report information on the current progress of the algorithm.</dd>
+</dl>
+<dl class="docutils">
+<dt>embedding: array of shape (n_samples, n_components)</dt>
+<dd>The optimized embedding.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.rdist">
+<code class="descclassname">umap.umap_.</code><code class="descname">rdist</code><a class="reference internal" href="_modules/umap/umap_.html#rdist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.rdist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reduced Euclidean distance.</p>
+<p>x: array of shape (embedding_dim,)
+y: array of shape (embedding_dim,)</p>
+<p>The squared euclidean distance between x and y</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.reset_local_connectivity">
+<code class="descclassname">umap.umap_.</code><code class="descname">reset_local_connectivity</code><a class="reference internal" href="_modules/umap/umap_.html#reset_local_connectivity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.reset_local_connectivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the local connectivity requirement – each data sample should
+have complete confidence in at least one 1-simplex in the simplicial set.
+We can enforce this by locally rescaling confidences, and then remerging the
+different local simplicial sets together.</p>
+<dl class="docutils">
+<dt>simplicial_set: sparse matrix</dt>
+<dd>The simplicial set for which to recalculate with respect to local
+connectivity.</dd>
+</dl>
+<dl class="docutils">
+<dt>simplicial_set: sparse_matrix</dt>
+<dd>The recalculated simplicial set, now with the local connectivity
+assumption restored.</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="umap.umap_.simplicial_set_embedding">
+<code class="descclassname">umap.umap_.</code><code class="descname">simplicial_set_embedding</code><span class="sig-paren">(</span><em>data</em>, <em>graph</em>, <em>n_components</em>, <em>initial_alpha</em>, <em>a</em>, <em>b</em>, <em>gamma</em>, <em>negative_sample_rate</em>, <em>n_epochs</em>, <em>init</em>, <em>random_state</em>, <em>metric</em>, <em>metric_kwds</em>, <em>verbose</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/umap/umap_.html#simplicial_set_embedding"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.simplicial_set_embedding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform a fuzzy simplicial set embedding, using a specified
+initialisation method and then minimizing the fuzzy set cross entropy
+between the 1-skeletons of the high and low dimensional fuzzy simplicial
+sets.</p>
+<dl class="docutils">
+<dt>data: array of shape (n_samples, n_features)</dt>
+<dd>The source data to be embedded by UMAP.</dd>
+<dt>graph: sparse matrix</dt>
+<dd>The 1-skeleton of the high dimensional fuzzy simplicial set as
+represented by a graph for which we require a sparse matrix for the
+(weighted) adjacency matrix.</dd>
+<dt>n_components: int</dt>
+<dd>The dimensionality of the euclidean space into which to embed the data.</dd>
+<dt>initial_alpha: float</dt>
+<dd>Initial learning rate for the SGD.</dd>
+<dt>a: float</dt>
+<dd>Parameter of differentiable approximation of right adjoint functor</dd>
+<dt>b: float</dt>
+<dd>Parameter of differentiable approximation of right adjoint functor</dd>
+<dt>gamma: float</dt>
+<dd>Weight to apply to negative samples.</dd>
+<dt>negative_sample_rate: int (optional, default 5)</dt>
+<dd>The number of negative samples to select per positive sample
+in the optimization process. Increasing this value will result
+in greater repulsive force being applied, greater optimization
+cost, but slightly more accuracy.</dd>
+<dt>n_epochs: int (optional, default 0)</dt>
+<dd>The number of training epochs to be used in optimizing the
+low dimensional embedding. Larger values result in more accurate
+embeddings. If 0 is specified a value will be selected based on
+the size of the input dataset (200 for large datasets, 500 for small).</dd>
+<dt>init: string</dt>
+<dd><dl class="first last docutils">
+<dt>How to initialize the low dimensional embedding. Options are:</dt>
+<dd><ul class="first last simple">
+<li>‘spectral’: use a spectral embedding of the fuzzy 1-skeleton</li>
+<li>‘random’: assign initial embedding positions at random.</li>
+<li>A numpy array of initial embedding positions.</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>random_state: numpy RandomState or equivalent</dt>
+<dd>A state capable being used as a numpy random state.</dd>
+<dt>metric: string</dt>
+<dd>The metric used to measure distance in high dimensional space; used if
+multiple connected components need to be layed out.</dd>
+<dt>metric_kwds: dict</dt>
+<dd>Key word arguments to be passed to the metric function; used if
+multiple connected components need to be layed out.</dd>
+<dt>verbose: bool (optional, default False)</dt>
+<dd>Whether to report information on the current progress of the algorithm.</dd>
+</dl>
+<dl class="docutils">
+<dt>embedding: array of shape (n_samples, n_components)</dt>
+<dd>The optimized of <code class="docutils literal notranslate"><span class="pre">graph</span></code> into an <code class="docutils literal notranslate"><span class="pre">n_components</span></code> dimensional
+euclidean space.</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="umap.umap_.smooth_knn_dist">
+<code class="descclassname">umap.umap_.</code><code class="descname">smooth_knn_dist</code><a class="reference internal" href="_modules/umap/umap_.html#smooth_knn_dist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#umap.umap_.smooth_knn_dist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a continuous version of the distance to the kth nearest
+neighbor. That is, this is similar to knn-distance but allows continuous
+k values rather than requiring an integral k. In esscence we are simply
+computing the distance such that the cardinality of fuzzy set we generate
+is k.</p>
+<dl class="docutils">
+<dt>distances: array of shape (n_samples, n_neighbors)</dt>
+<dd>Distances to nearest neighbors for each samples. Each row should be a
+sorted list of distances to a given samples nearest neighbors.</dd>
+<dt>k: float</dt>
+<dd>The number of nearest neighbors to approximate for.</dd>
+<dt>n_iter: int (optional, default 64)</dt>
+<dd>We need to binary search for the correct distance value. This is the
+max number of iterations to use in such a search.</dd>
+<dt>local_connectivity: int (optional, default 1)</dt>
+<dd>The local connectivity required – i.e. the number of nearest
+neighbors that should be assumed to be connected at a local level.
+The higher this value the more connected the manifold becomes
+locally. In practice this should be not more than the local intrinsic
+dimension of the manifold.</dd>
+<dt>bandwidth: float (optional, default 1)</dt>
+<dd>The target bandwidth of the kernel, larger values will produce
+larger return values.</dd>
+</dl>
+<dl class="docutils">
+<dt>knn_dist: array of shape (n_samples,)</dt>
+<dd>The distance to kth nearest neighbor, as suitably approximated.</dd>
+<dt>nn_dist: array of shape (n_samples,)</dt>
+<dd>The distance to the 1st nearest neighbor for each point.</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="benchmarking.html" class="btn btn-neutral" title="Performance Comparison of Dimension Reduction Implementations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Leland McInnes.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  <script type="text/javascript" src="_static/js/theme.js"></script>
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
