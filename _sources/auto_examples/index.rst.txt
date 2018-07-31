@@ -81,13 +81,13 @@ data? Submit a pull request to have it added as an example!
 
   .. container:: sphx-glr-download
 
-    :download:`Download all examples in Python source code: auto_examples_python.zip <//Users/sauln/libraries/umap/docs/auto_examples/auto_examples_python.zip>`
+    :download:`Download all examples in Python source code: auto_examples_python.zip <//Users/sauln/libraries/umap/doc/auto_examples/auto_examples_python.zip>`
 
 
 
   .. container:: sphx-glr-download
 
-    :download:`Download all examples in Jupyter notebooks: auto_examples_jupyter.zip <//Users/sauln/libraries/umap/docs/auto_examples/auto_examples_jupyter.zip>`
+    :download:`Download all examples in Jupyter notebooks: auto_examples_jupyter.zip <//Users/sauln/libraries/umap/doc/auto_examples/auto_examples_jupyter.zip>`
 
 
 .. only:: html
